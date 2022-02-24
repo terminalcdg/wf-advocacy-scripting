@@ -1,0 +1,347 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.21/jquery.scrollify.min.js" integrity="sha512-UyX8JsMsNRW1cYl8BoxpcamonpwU2y7mSTsN0Z52plp7oKo1u92Xqfpv6lOlTyH3yiMXK+gU1jw0DVCsPTfKew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style>
+    #intercom-frame, .intercom-lightweight-app, .intercom-app {
+        display: none !important;
+    }
+    ::-moz-selection { /* Code for Firefox */
+        color: white;
+        background: black;
+    }
+    ul {
+        padding-left: 40px;
+        padding-right: 0px;
+    }
+
+    ::selection {
+        color: white;
+        background: black;
+    }
+    .pagination {
+        position: fixed;
+        right: 30px;
+        top: calc(50% + 30px);
+        transform: translateY(-50%);
+        z-index: 300;
+    }
+    .pagination a, u {
+        display:block;
+        height:20px;
+        width:20px;
+        margin-bottom:5px;
+        color:black;
+        padding:5px;
+        border: none !important;
+    }
+    .pagination a.active:after {
+        box-shadow:inset 0 0 0 5px;
+    }
+    .pagination a .hover-text {
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        width: 50vh;
+        visibility:hidden;
+        opacity:0;
+        font-family: Arial,sans-serif;
+        font-weight: 700;
+        font-size: 10px;
+        text-transform: uppercase;
+        text-align: center;
+        -webkit-transition: visibility 0s, opacity 0.5s ease;
+        transition: visibility 0s, opacity 0.5s ease;
+        transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+    }
+    .pagination a:hover .hover-text {
+        visibility: visible;
+        opacity: 1;
+    }
+    .pagination a:after {
+        -webkit-transition:box-shadow 0.5s ease;
+        transition:box-shadow 0.5s ease;
+        width:10px;
+        height:10px;
+        display: block;
+        border:1px solid;
+        border-radius:50%;
+        content:'';
+        margin:auto;
+        bottom:0;
+    }
+</style>
+
+<script>
+    $(document).ready(function($) {
+// Create a condition that targets viewports at least 768px wide
+        const mediaQuery = window.matchMedia('(min-width: 768px)')
+
+        function handleTabletChange(e) {
+            // Check if the media query is true
+            if (e.matches) {
+                var prevIndex = 0;
+                $.scrollify({
+                    section:".s-scroll",
+                    standardScrollElements:".non-snappy",
+                    easing:"swing",
+                    scrollbars:false,
+                    before:function(i,panels) {
+                        console.log("prev " + prevIndex);
+                        console.log($.scrollify.currentIndex());
+
+                        if($.scrollify.currentIndex() == 0 || prevIndex == 0) {
+                            $.scrollify.setOptions({scrollSpeed: 2000});
+                        } else {
+                            $.scrollify.setOptions({scrollSpeed: 1000});
+                        }
+
+                        if (prevIndex == 0) {
+                            $(".top-scrollify").css("position", "fixed");
+                            $(".top-scrollify").css("left", "100vw");
+                            $(function () {
+                                $(".fill").animate({
+                                    marginLeft: '-50vw'
+                                }, { duration: 2000, queue: false});
+                                var rand1 = Math.floor((Math.random() * 30)) + "vw";
+                                $(".wtii-1").animate({
+                                    marginLeft: rand1
+                                }, { duration: 2000, queue: false});
+                                var rand2 = Math.floor((Math.random() * -15)) + "vw";
+                                $(".wtii-2").animate({
+                                    marginLeft: rand2
+                                }, { duration: 2000, queue: false});
+                                var rand3 = Math.floor((Math.random() * 15)) + "vw";
+                                $(".wtii-3").animate({
+                                    marginLeft: rand3
+                                }, { duration: 2000, queue: false});
+                                var rand4 = Math.floor((Math.random() * -30)) + "vw";
+                                $(".wtii-4").animate({
+                                    marginLeft: rand4
+                                }, { duration: 2000, queue: false});
+                                $(".top-scrollify").animate({
+                                    left: '50vw'
+                                }, { duration: 2000, queue: false});
+                                setTimeout(function(){
+                                    $(".top-scrollify").css("position", "relative");
+                                    $(".top-scrollify").css("left", "0vw");
+                                }, 2010);
+                            });
+                            prevIndex = $.scrollify.currentIndex();
+                        } else if ($.scrollify.currentIndex() == 0) {
+                            $(".top-scrollify").css("position", "fixed");
+                            $(".top-scrollify").css("left", "50vw");
+                            $(function () {
+                                $(".fill").animate({
+                                    marginLeft: '0vw'
+                                }, { duration: 2000, queue: false});
+                                var rand1 = Math.floor((Math.random() * -30)) + "vw";
+                                $(".wtii-1").animate({
+                                    marginLeft: rand1
+                                }, { duration: 2000, queue: false});
+                                var rand2 = Math.floor((Math.random() * 15)) + "vw";
+                                $(".wtii-2").animate({
+                                    marginLeft: rand2
+                                }, { duration: 2000, queue: false});
+                                var rand3 = Math.floor((Math.random() * -15)) + "vw";
+                                $(".wtii-3").animate({
+                                    marginLeft: rand3
+                                }, { duration: 2000, queue: false});
+                                var rand4 = Math.floor((Math.random() * 30)) + "vw";
+                                $(".wtii-4").animate({
+                                    marginLeft: rand4
+                                }, { duration: 2000, queue: false});
+                                $(".top-scrollify").animate({
+                                    left: '100vw'
+                                }, { duration: 2000, queue: false});
+                            });
+                            prevIndex = $.scrollify.currentIndex();
+                        } else if ($.scrollify.currentIndex() == 7) {
+                            $(function () {
+                                $(".non-snappy").animate({
+                                    left: '0vw'
+                                }, { duration: 1000, queue: false});
+                            });
+                            prevIndex = $.scrollify.currentIndex();
+                        } else if (prevIndex == 7) {
+                            $(function () {
+                                $(".non-snappy").animate({
+                                    left: '50vw'
+                                }, { duration: 1000, queue: false});
+                            });
+                            prevIndex = $.scrollify.currentIndex();
+                        } else {
+                            prevIndex = $.scrollify.currentIndex();
+                        }
+
+                        var ref = panels[i].attr("data-section-name").replace(/ /g, "-");
+
+                        $(".pagination .active").removeClass("active");
+
+                        $(".pagination").find("a[href=\"#" + ref + "\"]").addClass("active");
+                    },
+                    afterRender:function() {
+                        var pagination = "<ul class=\"pagination\">";
+                        var activeClass = "";
+                        $(".s-scroll").each(function(i) {
+                            activeClass = "";
+                            if(i===$.scrollify.currentIndex()) {
+                                activeClass = "active";
+                            }
+                            pagination += "<li><a class=\"" + activeClass + "\" href=\"#" + $(this).attr("data-section-name").replace(/ /g, "-") + "\"><span class=\"hover-text\">" + $(this).attr("data-section-name").charAt(0).toUpperCase() + $(this).attr("data-section-name").slice(1) + "</span></a></li>";
+                        });
+
+                        pagination += "</ul>";
+
+                        $(".ibor-s-wrapper").append(pagination);
+                        /*
+
+                        Tip: The two click events below are the same:
+
+                        $(".pagination a").on("click",function() {
+                          $.scrollify.move($(this).attr("href"));
+                        });
+
+                        */
+                        $(".pagination a").on("click", $.scrollify.move);
+
+                        $(".nav-link-2").click((event) => {
+                            $.scrollify.move("#Preamble");
+                        });
+
+                        $(".right-nav-link").click((event) => {
+                            $.scrollify.move("#Take-Action");
+                        });
+
+                    }
+                });
+            } else {
+
+
+
+
+
+
+
+
+
+
+
+                $.scrollify({
+                    section:".s-scroll",
+                    standardScrollElements:".non-snappy",
+                    easing:"swing",
+                    scrollbars:false,
+                    before:function(i,panels) {
+                        console.log("prev " + prevIndex);
+                        console.log($.scrollify.currentIndex());
+
+                        if($.scrollify.currentIndex() == 0 || prevIndex == 0) {
+                            $.scrollify.setOptions({scrollSpeed: 2000});
+                        } else {
+                            $.scrollify.setOptions({scrollSpeed: 1000});
+                        }
+
+                        if (prevIndex == 0) {
+                            $(function () {
+                                $(".wtii-bg-wrapper").animate({
+                                    marginTop: '-33vh'
+                                }, { duration: 2000, queue: false});
+                                var rand1 = Math.floor((Math.random() * 30)) + "vw";
+                                $(".wtii-1").animate({
+                                    marginLeft: rand1
+                                }, { duration: 2000, queue: false});
+                                var rand2 = Math.floor((Math.random() * -15)) + "vw";
+                                $(".wtii-2").animate({
+                                    marginLeft: rand2
+                                }, { duration: 2000, queue: false});
+                                var rand3 = Math.floor((Math.random() * 15)) + "vw";
+                                $(".wtii-3").animate({
+                                    marginLeft: rand3
+                                }, { duration: 2000, queue: false});
+                                var rand4 = Math.floor((Math.random() * -30)) + "vw";
+                                $(".wtii-4").animate({
+                                    marginLeft: rand4
+                                }, { duration: 2000, queue: false});
+                            });
+                            prevIndex = $.scrollify.currentIndex();
+                        } else if ($.scrollify.currentIndex() == 0) {
+                            $(function () {
+                                $(".wtii-bg-wrapper").animate({
+                                    marginTop: '0vh'
+                                }, { duration: 2000, queue: false});
+                                var rand1 = Math.floor((Math.random() * -30)) + "vw";
+                                $(".wtii-1").animate({
+                                    marginLeft: rand1
+                                }, { duration: 2000, queue: false});
+                                var rand2 = Math.floor((Math.random() * 15)) + "vw";
+                                $(".wtii-2").animate({
+                                    marginLeft: rand2
+                                }, { duration: 2000, queue: false});
+                                var rand3 = Math.floor((Math.random() * -15)) + "vw";
+                                $(".wtii-3").animate({
+                                    marginLeft: rand3
+                                }, { duration: 2000, queue: false});
+                                var rand4 = Math.floor((Math.random() * 30)) + "vw";
+                                $(".wtii-4").animate({
+                                    marginLeft: rand4
+                                }, { duration: 2000, queue: false});
+                            });
+                            prevIndex = $.scrollify.currentIndex();
+                        } else {
+                            prevIndex = $.scrollify.currentIndex();
+                        }
+
+                        var ref = panels[i].attr("data-section-name").replace(/ /g, "-");
+
+                        $(".pagination .active").removeClass("active");
+
+                        $(".pagination").find("a[href=\"#" + ref + "\"]").addClass("active");
+                    },
+                    afterRender:function() {
+                        var pagination = "<ul class=\"pagination\">";
+                        var activeClass = "";
+                        $(".s-scroll").each(function(i) {
+                            activeClass = "";
+                            if(i===$.scrollify.currentIndex()) {
+                                activeClass = "active";
+                            }
+                            pagination += "<li><a class=\"" + activeClass + "\" href=\"#" + $(this).attr("data-section-name").replace(/ /g, "-") + "\"><span class=\"hover-text\">" + $(this).attr("data-section-name").charAt(0).toUpperCase() + $(this).attr("data-section-name").slice(1) + "</span></a></li>";
+                        });
+
+                        pagination += "</ul>";
+
+                        $(".ibor-s-wrapper").append(pagination);
+                        /*
+
+                        Tip: The two click events below are the same:
+
+                        $(".pagination a").on("click",function() {
+                          $.scrollify.move($(this).attr("href"));
+                        });
+
+                        */
+                        $(".pagination a").on("click", $.scrollify.move);
+
+                        $(".nav-link-2").click((event) => {
+                            $.scrollify.move("#Preamble");
+                        });
+
+                        $(".right-nav-link").click((event) => {
+                            $.scrollify.move("#Take-Action");
+                        });
+
+                    }
+                });
+            }
+        }
+
+// Register event listener
+        mediaQuery.addListener(handleTabletChange)
+
+// Initial check
+        handleTabletChange(mediaQuery)
+
+    });
+
+</script>
